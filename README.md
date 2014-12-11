@@ -74,6 +74,7 @@ Code:
 	Left Sensor: Turn off the RED LIGHT.
 	
 Lessons Learned:
+
 	The biggest lesson learned is that the ADC of the MSP430 cannot be configured in the interrupt. The reason is
 	unknown, but this is also a root cause of the problem. Another lesson, that probably caused the most trouble is that
 	no P1.0, P1.1, and Pl.2 is used by the MSP430 is always transmitting. Thus using it as an ADC is not rational. The
