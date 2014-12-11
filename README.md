@@ -38,7 +38,9 @@ Center:
 Data:
 ![alt text](https://raw.githubusercontent.com/vipersfly23/Lab7_Robot/master/dataCollected.GIF "DATA")
 
-  This allowed me to have a good idea of what the digital value means. Without the characterization, the digital number obtained would simply be numbers that are unit less. Now, the numbers correspond to a distance. The higher the number the closer the robot is to the wall.
+  This allowed me to have a good idea of what the digital value means. Without the characterization, the digital number
+  obtained would simply be numbers that are unit less. Now, the numbers correspond to a distance. The higher the number the
+  closer the robot is to the wall.
   
 Code:
  Lab7 primarily composed of figuring out the following code:
@@ -47,29 +49,45 @@ Code:
 	ADC10AE0 = BIT3 | BIT4 | BIT5;		 			// Make P1.3,P1.4, P1.5 analog input
 	ADC10CTL0 = SREF_0 | ADC10SHT_3 | ADC10ON | ENC;// Vcc & Vss as reference
 	
-	Once this code was defined, the ADC was configured. Since I used an interrupt implementation, I had to write an extra method called selectInch(int8 num). This method just defined which pin I was obtaining data from:
+	Once this code was defined, the ADC was configured. Since I used an interrupt implementation, I had to write an extra
+	method called selectInch(int8 num). This method just defined which pin I was obtaining data from:
 	ADC10CTL0 &= ~ENC; //turns off ADC
 		ADC10CTL1 = INCH_3;  //Reads from P1.3
 		ADC10CTL0 |= ENC; //turns ADC back on
 		
-	I'm not sure why a method was required to change which pin to read from but for someone reason the change couldn't be done within the timer.
+	I'm not sure why a method was required to change which pin to read from but for someone reason the change couldn't be
+	done within the timer.
 	
 ##Debugging/Testing
 
-	Methodology: The methodology used was to simply get the sensors working. There wasn't much plan besides knowing that I wanted to use interrupts to implement the sensing.  The preliminary design just understood how to set up the ADC on the MSP430, and that composed primarily of understanding the code displayed above.
+	Methodology: The methodology used was to simply get the sensors working. There wasn't much plan besides knowing that
+	I wanted to use interrupts to implement the sensing.  The preliminary design just understood how to set up the ADC on
+	the MSP430, and that composed primarily of understanding the code displayed above.
 	
-	Testing: The test was conducted using lights. When an object was within a certain distance of the right sensor the red light on the MSP430 would be illuminated. When an object was within a predefined range of the center sensor the green light would turn on, when the object further the green light would turn off. When an object is within a distance of the left sensor the red light would turn off.
+	Testing: The test was conducted using lights. When an object was within a certain distance of the right sensor the
+	red light on the MSP430 would be illuminated. When an object was within a predefined range of the center sensor the
+	green light would turn on, when the object further the green light would turn off. When an object is within a
+	distance of the left sensor the red light would turn off.
 	
 	Right Sensor: Turn on RED LIGHT
 	Center Sensor: Turn on GREEN LIGHT within distance, else turns off
 	Left Sensor: Turn off the RED LIGHT.
 	
 Lessons Learned:
-	The biggest lesson learned is that the ADC of the MSP430 cannot be configured in the interrupt. The reason is unknown, but this is also a root cause of the problem. Another lesson, that probably caused the most trouble is that no P1.0, P1.1, and Pl.2 is used by the MSP430 is always transmitting. Thus using it as an ADC is not rational. The pin could probably be configured to turn off the function it's performing, but to mitigate additional work and problems, I simply just used P1.3, P1.4, and P1.5. Other than that the lab went smoothly, and working with interrupts was a lot of fun.
+	The biggest lesson learned is that the ADC of the MSP430 cannot be configured in the interrupt. The reason is
+	unknown, but this is also a root cause of the problem. Another lesson, that probably caused the most trouble is that
+	no P1.0, P1.1, and Pl.2 is used by the MSP430 is always transmitting. Thus using it as an ADC is not rational. The
+	pin could probably be configured to turn off the function it's performing, but to mitigate additional work and
+	problems, I simply just used P1.3, P1.4, and P1.5. Other than that the lab went smoothly, and working with interrupts
+	was a lot of fun.
 	
-	Conclusively, understanding of how to use the MSP430 as an ADC and characterizing the MSP430 was a success. I was able to obtain a lot of knowledge on how to use the MSP430 and how to implement IR sensors with it. This also allowed for a profound better understanding of interrupts which will definitely play a large role in future designs. Everything worked as planned, with some difficulty at first but it all worked out in the end.
+	Conclusively, understanding of how to use the MSP430 as an ADC and characterizing the MSP430 was a success. I was
+	able to obtain a lot of knowledge on how to use the MSP430 and how to implement IR sensors with it. This also allowed
+	for a profound better understanding of interrupts which will definitely play a large role in future designs.
+	Everything worked as planned, with some difficulty at first but it all worked out in the end.
 	
 ###Documentation:
 	
-	Cadet Bodin figured out that the ADC must be configured outside of the interrupt. I used his idea of creating a method that would be called by the interrupt that would configure the ADC. I alsu used the codes provided by 
+	Cadet Bodin figured out that the ADC must be configured outside of the interrupt. I used his idea of creating a
+	method that would be called by the interrupt that would configure the ADC. I alsu used the codes provided by 
 
