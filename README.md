@@ -73,7 +73,7 @@ Code:
 	Center Sensor: Turn on GREEN LIGHT within distance, else turns off
 	Left Sensor: Turn off the RED LIGHT.
 	
-Lessons Learned:
+###Lessons Learned:
 
 	The biggest lesson learned is that the ADC of the MSP430 cannot be configured in the interrupt. The reason is
 	unknown, but this is also a root cause of the problem. Another lesson, that probably caused the most trouble is that
@@ -81,7 +81,9 @@ Lessons Learned:
 	pin could probably be configured to turn off the function it's performing, but to mitigate additional work and
 	problems, I simply just used P1.3, P1.4, and P1.5. Other than that the lab went smoothly, and working with interrupts
 	was a lot of fun.
-	
+
+#Conclusion
+
 	Conclusively, understanding of how to use the MSP430 as an ADC and characterizing the MSP430 was a success. I was
 	able to obtain a lot of knowledge on how to use the MSP430 and how to implement IR sensors with it. This also allowed
 	for a profound better understanding of interrupts which will definitely play a large role in future designs.
@@ -91,4 +93,5 @@ Lessons Learned:
 	
 	Cadet Bodin figured out that the ADC must be configured outside of the interrupt. I used his idea of creating a
 	method that would be called by the interrupt that would configure the ADC. I alsu used the codes provided by 
+	http://ecse.bd.psu.edu/cmpen352/
 
